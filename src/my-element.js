@@ -11,33 +11,52 @@ export class MyElement extends LitElement {
     return {
 
       /**
-       * The number of times the button has been clicked.
+       * The number of page currenty
        */
-      count: { type: Number },
+      position: { type: Number },
     }
   }
 
   constructor() {
     super()
 
-    this.count = 0
+    this.position = 0
   }
+
+  setPrevious(e) {
+    if (this.position === 0) {
+      this.position = 5
+    }
+    else {
+      this.position--
+    }
+  }
+
+  setNext(e) {
+    if (this.position == 5) {
+      this.position = 0
+    }
+    else {
+      this.position++
+    }
+  }
+
 
   render() {
     return html`
     <div>
-      <button>Anterior</button>
-      <button>Siguiente</button>
-
-      <marvel-element></marvel-element>
-      <antiheroe-element></antiheroe-element>
-      <anime-element></anime-element>
-      <pequenya-guia-starwars></pequenya-guia-starwars>
-      <hotline-miami></hotline-miami>
-      <tarantino-movies></tarantino-movies>
-
-  </div>
-      `
+      <button @click="${this.setPrevious}">Anterior</button>
+      <button @click="${this.setNext}">Siguiente</button>
+      <h1>${this.position}</h1>
+      ${this.position===0 ? html `<marvel-element></marvel-element>` : ''}
+      ${this.position===1 ? html `<antiheroe-element></antiheroe-element>` : ''}
+      ${this.position===2 ? html `<anime-element></anime-element>`:''}
+      ${this.position===3 ? html `<pequenya-guia-starwars></pequenya-guia-starwars>`:''}
+      ${this.position===4 ? html `<hotline-miami></hotline-miami>`:''}
+      ${this.position===5 ? html `<tarantino-movies></tarantino-movies>`:''}
+      
+    </div>
+     `
   }
 
   _onClick() {
@@ -53,19 +72,7 @@ export class MyElement extends LitElement {
         text-align: center;
       }
 
-      .logo {
-        height: 6em;
-        padding: 1.5em;
-        will-change: filter;
-        transition: filter 300ms;
-      }
-      .logo:hover {
-        filter: drop-shadow(0 0 2em #646cffaa);
-      }
-      .logo.lit:hover {
-        filter: drop-shadow(0 0 2em #325cffaa);
-      }
-
+      
       .card {
         padding: 2em;
       }
@@ -95,7 +102,7 @@ export class MyElement extends LitElement {
         font-size: 1em;
         font-weight: 500;
         font-family: inherit;
-        background-color: #1a1a1a;
+        background-color: #5a91d8;
         cursor: pointer;
         transition: border-color 0.25s;
       }
